@@ -3,19 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rusydi Yusof</title>
+<title>Rusydi Yusof — Portfolio</title>
 <style>
   :root{
-    --bg:#0d1117;
-    --card:#161b22;
-    --border:#2a3038;
+    --bg:#07090d;
+    --card:rgba(22,27,34,0.65);
+    --border:rgba(255,255,255,0.08);
     --text:#e6edf3;
     --muted:#8b949e;
     --accent:#58a6ff;
+    --accent2:#a371f7;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
   body{
-    background:radial-gradient(circle at 50% 0%, #1a2230, var(--bg));
+    background:var(--bg);
     color:var(--text);
     font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
     min-height:100vh;
@@ -23,82 +25,143 @@
     align-items:center;
     justify-content:center;
     padding:24px;
+    overflow:hidden;
+    position:relative;
   }
-  .card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:40px 36px;
+  .blob{
+    position:absolute;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:0.35;
+    z-index:0;
+    animation:float 10s ease-in-out infinite alternate;
+  }
+  .blob.b1{ background:var(--accent); top:-100px; left:-100px; }
+  .blob.b2{ background:var(--accent2); bottom:-120px; right:-80px; animation-delay:2s; }
+
+  @keyframes float{
+    from{ transform:translate(0,0) scale(1); }
+    to{ transform:translate(30px,-20px) scale(1.1); }
+  }
+
+  .card-wrap{
+    position:relative;
+    z-index:1;
     max-width:420px;
     width:100%;
-    text-align:center;
-    box-shadow:0 20px 50px rgba(0,0,0,0.5);
+    border-radius:20px;
+    padding:2px;
+    background:linear-gradient(135deg, var(--accent), var(--accent2), var(--accent));
+    background-size:200% 200%;
+    animation:borderShift 6s ease infinite;
+    box-shadow:0 25px 60px rgba(0,0,0,0.6);
   }
+  @keyframes borderShift{
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
+  }
+
+  .card{
+    background:var(--card);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:42px 36px;
+    text-align:center;
+  }
+
   .avatar{
-    width:96px;
-    height:96px;
+    width:100px;
+    height:100px;
     border-radius:50%;
     margin:0 auto 20px;
-    background:linear-gradient(135deg, var(--accent), #1f6feb);
+    background:linear-gradient(135deg, var(--accent), var(--accent2));
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:34px;
-    font-weight:700;
-    color:#fff;
+    box-shadow:0 0 0 4px rgba(88,166,255,0.15), 0 10px 30px rgba(88,166,255,0.35);
   }
+  .avatar svg{ width:52px; height:52px; }
+
   h1{
-    font-size:22px;
-    font-weight:600;
+    font-size:23px;
+    font-weight:700;
+    letter-spacing:0.2px;
   }
   .role{
     color:var(--accent);
-    font-size:14px;
-    margin-top:6px;
-    letter-spacing:0.3px;
+    font-size:13.5px;
+    margin-top:8px;
+    letter-spacing:0.6px;
+    text-transform:uppercase;
+    font-weight:600;
   }
   .divider{
     height:1px;
-    background:var(--border);
-    margin:22px 0;
+    background:linear-gradient(90deg, transparent, var(--border), transparent);
+    margin:24px 0;
   }
   .skills{
     display:flex;
     flex-wrap:wrap;
-    gap:8px;
+    gap:9px;
     justify-content:center;
-    margin-bottom:22px;
+    margin-bottom:24px;
   }
   .skill{
-    background:#1f2733;
-    border:1px solid var(--border);
+    background:rgba(88,166,255,0.08);
+    border:1px solid rgba(88,166,255,0.25);
     color:var(--text);
     font-size:12px;
-    padding:6px 12px;
+    font-weight:500;
+    padding:7px 14px;
     border-radius:999px;
+    transition:transform 0.2s ease, background 0.2s ease;
+  }
+  .skill:hover{
+    transform:translateY(-2px);
+    background:rgba(88,166,255,0.18);
   }
   .fact{
     color:var(--muted);
     font-size:13px;
     line-height:1.6;
-    font-style:italic;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
   }
 </style>
 </head>
 <body>
-  <div class="card">
-    <div class="avatar">RY</div>
-    <h1>Rusydi Yusof</h1>
-    <div class="role">Business Intelligence & Data Analytics Lead</div>
-    <div class="divider"></div>
-    <div class="skills">
-      <span class="skill">SQL</span>
-      <span class="skill">Power BI</span>
-      <span class="skill">Python</span>
-      <span class="skill">Data Engineering</span>
-      <span class="skill">Automation</span>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+
+  <div class="card-wrap">
+    <div class="card">
+      <div class="avatar">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#fff" opacity="0.95"/>
+          <path d="M2 17l10 5 10-5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12l10 5 10-5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h1>Rusydi Yusof</h1>
+      <div class="role">DE to DevOps</div>
+      <div class="divider"></div>
+      <div class="skills">
+        <span class="skill">SQL</span>
+        <span class="skill">Power BI</span>
+        <span class="skill">Python</span>
+        <span class="skill">DevOps</span>
+        <span class="skill">Automation</span>
+      </div>
+      <p class="fact">🏓 Sedang cuba hidup.</p>
     </div>
-    <p class="fact">Suka main pingpong.</p>
   </div>
 </body>
 </html>
