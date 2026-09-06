@@ -5,73 +5,125 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rusydi Yusof — Portfolio</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap');
+
   :root{
-    --bg:#07090d;
-    --card:rgba(22,27,34,0.65);
-    --border:rgba(255,255,255,0.08);
-    --text:#e6edf3;
-    --muted:#8b949e;
-    --accent:#58a6ff;
-    --accent2:#a371f7;
+    --bg:#0f0b1e;
+    --card:rgba(24,18,42,0.75);
+    --pink:#ff6ec7;
+    --purple:#b389ff;
+    --cyan:#5ef1e6;
+    --yellow:#ffd166;
+    --text:#f3eeff;
+    --muted:#b9aed9;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{height:100%;}
   body{
-    background:var(--bg);
+    background:linear-gradient(-45deg, #0f0b1e, #1b1233, #22112f, #0f0b1e);
+    background-size:400% 400%;
+    animation:bgShift 14s ease infinite;
     color:var(--text);
-    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family:'Poppins', system-ui, sans-serif;
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:24px;
+    position:relative;
     overflow:hidden;
-    position:relative;
+    perspective:1000px;
   }
-  .blob{
-    position:absolute;
-    width:420px;
-    height:420px;
-    border-radius:50%;
-    filter:blur(90px);
-    opacity:0.35;
-    z-index:0;
-    animation:float 10s ease-in-out infinite alternate;
-  }
-  .blob.b1{ background:var(--accent); top:-100px; left:-100px; }
-  .blob.b2{ background:var(--accent2); bottom:-120px; right:-80px; animation-delay:2s; }
-
-  @keyframes float{
-    from{ transform:translate(0,0) scale(1); }
-    to{ transform:translate(30px,-20px) scale(1.1); }
-  }
-
-  .card-wrap{
-    position:relative;
-    z-index:1;
-    max-width:420px;
-    width:100%;
-    border-radius:20px;
-    padding:2px;
-    background:linear-gradient(135deg, var(--accent), var(--accent2), var(--accent));
-    background-size:200% 200%;
-    animation:borderShift 6s ease infinite;
-    box-shadow:0 25px 60px rgba(0,0,0,0.6);
-  }
-  @keyframes borderShift{
+  @keyframes bgShift{
     0%{ background-position:0% 50%; }
     50%{ background-position:100% 50%; }
     100%{ background-position:0% 50%; }
   }
 
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:0.45;
+    z-index:0;
+  }
+  .blob.b1{ width:280px; height:280px; background:var(--pink); top:-60px; left:-60px; animation:floatA 8s ease-in-out infinite; }
+  .blob.b2{ width:320px; height:320px; background:var(--purple); bottom:-90px; right:-70px; animation:floatB 10s ease-in-out infinite; }
+  .blob.b3{ width:200px; height:200px; background:var(--cyan); top:40%; right:10%; animation:floatC 9s ease-in-out infinite; }
+  @keyframes floatA{ 0%,100%{ transform:translate(0,0) rotate(0deg); } 50%{ transform:translate(40px,50px) rotate(20deg); } }
+  @keyframes floatB{ 0%,100%{ transform:translate(0,0) rotate(0deg); } 50%{ transform:translate(-40px,-30px) rotate(-15deg); } }
+  @keyframes floatC{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(-20px,30px) scale(1.15); } }
+
+  .dot{
+    position:absolute;
+    width:8px; height:8px;
+    border-radius:50%;
+    z-index:1;
+    animation:bob 4s ease-in-out infinite;
+  }
+  .dot:nth-child(4){ top:12%; left:18%; background:var(--yellow); animation-delay:0s; }
+  .dot:nth-child(5){ top:22%; right:14%; background:var(--pink); animation-delay:0.7s; width:6px; height:6px; }
+  .dot:nth-child(6){ bottom:18%; left:12%; background:var(--cyan); animation-delay:1.4s; }
+  .dot:nth-child(7){ bottom:14%; right:20%; background:var(--purple); animation-delay:2.1s; width:10px; height:10px; }
+  .dot:nth-child(8){ top:50%; left:6%; background:var(--yellow); animation-delay:2.8s; width:5px; height:5px; }
+  @keyframes bob{
+    0%,100%{ transform:translateY(0) rotate(0deg); opacity:0.7; }
+    50%{ transform:translateY(-18px) rotate(180deg); opacity:1; }
+  }
+
+  .card-wrap{
+    position:relative;
+    z-index:2;
+    max-width:400px;
+    width:100%;
+    border-radius:26px;
+    padding:3px;
+    background:linear-gradient(135deg, var(--pink), var(--purple), var(--cyan), var(--yellow));
+    background-size:300% 300%;
+    animation:rainbowShift 6s ease infinite, popIn 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    box-shadow:0 25px 60px rgba(179,137,255,0.25);
+    opacity:0;
+    transform:scale(0.85);
+    transition:transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease;
+    transform-style:preserve-3d;
+  }
+  .card-wrap:hover{
+    transform:scale(1.03) rotateX(4deg) rotateY(-4deg);
+    box-shadow:0 35px 80px rgba(255,110,199,0.35);
+  }
+  @keyframes rainbowShift{
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
+  }
+  @keyframes popIn{
+    to{ opacity:1; transform:scale(1); }
+  }
+
   .card{
     background:var(--card);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:42px 36px;
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-radius:23px;
+    padding:44px 34px;
     text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  /* sheen sweep across the card */
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0; left:-150%;
+    width:60%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.10), transparent);
+    transform:skewX(-20deg);
+    animation:sheen 5s ease-in-out infinite;
+  }
+  @keyframes sheen{
+    0%{ left:-150%; }
+    50%{ left:150%; }
+    100%{ left:150%; }
   }
 
   .avatar{
@@ -79,32 +131,73 @@
     height:100px;
     border-radius:50%;
     margin:0 auto 20px;
-    background:linear-gradient(135deg, var(--accent), var(--accent2));
     display:flex;
     align-items:center;
     justify-content:center;
-    box-shadow:0 0 0 4px rgba(88,166,255,0.15), 0 10px 30px rgba(88,166,255,0.35);
+    background:linear-gradient(135deg, var(--pink), var(--purple));
+    box-shadow:0 10px 30px rgba(255,110,199,0.4);
+    animation:wiggle 3s ease-in-out infinite;
+    transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    position:relative;
   }
-  .avatar svg{ width:52px; height:52px; }
+  .avatar::after{
+    content:"";
+    position:absolute;
+    inset:-6px;
+    border-radius:50%;
+    border:2px dashed rgba(255,255,255,0.35);
+    animation:spin 8s linear infinite;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .avatar:hover{ transform:scale(1.15) rotate(-6deg); }
+  @keyframes wiggle{
+    0%,100%{ transform:rotate(-3deg); }
+    50%{ transform:rotate(3deg); }
+  }
+  .avatar span{
+    font-family:'Baloo 2', sans-serif;
+    font-size:36px;
+    font-weight:700;
+    color:#fff;
+  }
 
   h1{
-    font-size:23px;
+    font-family:'Baloo 2', sans-serif;
+    font-size:26px;
     font-weight:700;
-    letter-spacing:0.2px;
+    background:linear-gradient(90deg, var(--pink), var(--cyan), var(--pink));
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:shimmer 4s linear infinite;
+  }
+  @keyframes shimmer{
+    to{ background-position:200% center; }
   }
   .role{
-    color:var(--accent);
-    font-size:13.5px;
+    color:var(--muted);
+    font-size:13px;
     margin-top:8px;
     letter-spacing:0.6px;
-    text-transform:uppercase;
-    font-weight:600;
+    font-weight:500;
+    transition:color 0.3s ease, letter-spacing 0.3s ease;
   }
+  .role:hover{
+    color:var(--yellow);
+    letter-spacing:1.2px;
+  }
+
   .divider{
-    height:1px;
-    background:linear-gradient(90deg, transparent, var(--border), transparent);
-    margin:24px 0;
+    width:60px;
+    height:3px;
+    border-radius:99px;
+    background:linear-gradient(90deg, var(--pink), var(--purple), var(--cyan));
+    background-size:200% auto;
+    margin:22px auto;
+    animation:shimmer 3s linear infinite;
   }
+
   .skills{
     display:flex;
     flex-wrap:wrap;
@@ -113,54 +206,68 @@
     margin-bottom:24px;
   }
   .skill{
-    background:rgba(88,166,255,0.08);
-    border:1px solid rgba(88,166,255,0.25);
+    background:rgba(255,255,255,0.06);
+    border:1.5px solid transparent;
+    background-image:linear-gradient(rgba(24,18,42,0.9),rgba(24,18,42,0.9)), linear-gradient(135deg, var(--pink), var(--cyan));
+    background-origin:border-box;
+    background-clip:padding-box, border-box;
     color:var(--text);
     font-size:12px;
     font-weight:500;
-    padding:7px 14px;
+    padding:7px 15px;
     border-radius:999px;
-    transition:transform 0.2s ease, background 0.2s ease;
+    transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, background 0.3s ease;
+    animation:pulseTag 3s ease-in-out infinite;
+  }
+  .skill:nth-child(2){ animation-delay:0.3s; }
+  .skill:nth-child(3){ animation-delay:0.6s; }
+  .skill:nth-child(4){ animation-delay:0.9s; }
+  .skill:nth-child(5){ animation-delay:1.2s; }
+  @keyframes pulseTag{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-3px); }
   }
   .skill:hover{
-    transform:translateY(-2px);
-    background:rgba(88,166,255,0.18);
+    transform:translateY(-6px) rotate(-3deg) scale(1.08);
+    box-shadow:0 10px 22px rgba(255,110,199,0.4);
   }
+
   .fact{
     color:var(--muted);
     font-size:13px;
-    line-height:1.6;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:6px;
+    line-height:1.7;
+    font-weight:400;
+    transition:transform 0.3s ease;
+  }
+  .fact:hover{ transform:scale(1.04); }
+  .fact strong{
+    color:var(--yellow);
+    font-weight:600;
   }
 </style>
 </head>
 <body>
   <div class="blob b1"></div>
   <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
 
   <div class="card-wrap">
     <div class="card">
-      <div class="avatar">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#fff" opacity="0.95"/>
-          <path d="M2 17l10 5 10-5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M2 12l10 5 10-5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+      <div class="avatar"><span>RY</span></div>
       <h1>Rusydi Yusof</h1>
-      <div class="role">DE to DevOps</div>
+      <div class="role">Data Janitor</div>
       <div class="divider"></div>
       <div class="skills">
         <span class="skill">SQL</span>
-        <span class="skill">Power BI</span>
         <span class="skill">Python</span>
         <span class="skill">DevOps</span>
-        <span class="skill">Automation</span>
       </div>
-      <p class="fact">🏓 Sedang cuba hidup.</p>
+      <p class="fact"><strong>Learn and relearn.</strong></p>
     </div>
   </div>
 </body>
