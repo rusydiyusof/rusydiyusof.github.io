@@ -1,274 +1,172 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rusydi Yusof — Portfolio</title>
+<title>Rusydi Yusof — Data Engineer</title>
+<meta name="description" content="Rusydi Yusof — data engineer working across SQL, Python and DevOps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap');
-
   :root{
-    --bg:#0f0b1e;
-    --card:rgba(24,18,42,0.75);
-    --pink:#ff6ec7;
-    --purple:#b389ff;
-    --cyan:#5ef1e6;
-    --yellow:#ffd166;
-    --text:#f3eeff;
-    --muted:#b9aed9;
+    --bg:#ffffff;
+    --surface:#ffffff;
+    --border:#e4e4e7;
+    --text:#18181b;
+    --muted:#52525b;
+    --subtle:#71717a;
+    --accent:#1d4ed8;
   }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b0c0e;
+      --surface:#141619;
+      --border:#26282d;
+      --text:#f4f4f5;
+      --muted:#a1a1aa;
+      --subtle:#8b8b94;
+      --accent:#7ba2ff;
+    }
+  }
+
   *{box-sizing:border-box; margin:0; padding:0;}
-  html,body{height:100%;}
   body{
-    background:linear-gradient(-45deg, #0f0b1e, #1b1233, #22112f, #0f0b1e);
-    background-size:400% 400%;
-    animation:bgShift 14s ease infinite;
+    background:var(--bg);
     color:var(--text);
-    font-family:'Poppins', system-ui, sans-serif;
+    font-family:'Inter', system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:24px;
-    position:relative;
-    overflow:hidden;
-    perspective:1000px;
-  }
-  @keyframes bgShift{
-    0%{ background-position:0% 50%; }
-    50%{ background-position:100% 50%; }
-    100%{ background-position:0% 50%; }
-  }
-
-  .blob{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(70px);
-    opacity:0.45;
-    z-index:0;
-  }
-  .blob.b1{ width:280px; height:280px; background:var(--pink); top:-60px; left:-60px; animation:floatA 8s ease-in-out infinite; }
-  .blob.b2{ width:320px; height:320px; background:var(--purple); bottom:-90px; right:-70px; animation:floatB 10s ease-in-out infinite; }
-  .blob.b3{ width:200px; height:200px; background:var(--cyan); top:40%; right:10%; animation:floatC 9s ease-in-out infinite; }
-  @keyframes floatA{ 0%,100%{ transform:translate(0,0) rotate(0deg); } 50%{ transform:translate(40px,50px) rotate(20deg); } }
-  @keyframes floatB{ 0%,100%{ transform:translate(0,0) rotate(0deg); } 50%{ transform:translate(-40px,-30px) rotate(-15deg); } }
-  @keyframes floatC{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(-20px,30px) scale(1.15); } }
-
-  .dot{
-    position:absolute;
-    width:8px; height:8px;
-    border-radius:50%;
-    z-index:1;
-    animation:bob 4s ease-in-out infinite;
-  }
-  .dot:nth-child(4){ top:12%; left:18%; background:var(--yellow); animation-delay:0s; }
-  .dot:nth-child(5){ top:22%; right:14%; background:var(--pink); animation-delay:0.7s; width:6px; height:6px; }
-  .dot:nth-child(6){ bottom:18%; left:12%; background:var(--cyan); animation-delay:1.4s; }
-  .dot:nth-child(7){ bottom:14%; right:20%; background:var(--purple); animation-delay:2.1s; width:10px; height:10px; }
-  .dot:nth-child(8){ top:50%; left:6%; background:var(--yellow); animation-delay:2.8s; width:5px; height:5px; }
-  @keyframes bob{
-    0%,100%{ transform:translateY(0) rotate(0deg); opacity:0.7; }
-    50%{ transform:translateY(-18px) rotate(180deg); opacity:1; }
-  }
-
-  .card-wrap{
-    position:relative;
-    z-index:2;
-    max-width:400px;
-    width:100%;
-    border-radius:26px;
-    padding:3px;
-    background:linear-gradient(135deg, var(--pink), var(--purple), var(--cyan), var(--yellow));
-    background-size:300% 300%;
-    animation:rainbowShift 6s ease infinite, popIn 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;
-    box-shadow:0 25px 60px rgba(179,137,255,0.25);
-    opacity:0;
-    transform:scale(0.85);
-    transition:transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease;
-    transform-style:preserve-3d;
-  }
-  .card-wrap:hover{
-    transform:scale(1.03) rotateX(4deg) rotateY(-4deg);
-    box-shadow:0 35px 80px rgba(255,110,199,0.35);
-  }
-  @keyframes rainbowShift{
-    0%{ background-position:0% 50%; }
-    50%{ background-position:100% 50%; }
-    100%{ background-position:0% 50%; }
-  }
-  @keyframes popIn{
-    to{ opacity:1; transform:scale(1); }
+    padding:32px 20px;
   }
 
   .card{
-    background:var(--card);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    border-radius:23px;
-    padding:44px 34px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-  }
-  /* sheen sweep across the card */
-  .card::before{
-    content:"";
-    position:absolute;
-    top:0; left:-150%;
-    width:60%; height:100%;
-    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.10), transparent);
-    transform:skewX(-20deg);
-    animation:sheen 5s ease-in-out infinite;
-  }
-  @keyframes sheen{
-    0%{ left:-150%; }
-    50%{ left:150%; }
-    100%{ left:150%; }
+    width:100%;
+    max-width:460px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:40px 36px;
   }
 
   .avatar{
-    width:100px;
-    height:100px;
+    width:64px;
+    height:64px;
     border-radius:50%;
-    margin:0 auto 20px;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(135deg, var(--pink), var(--purple));
-    box-shadow:0 10px 30px rgba(255,110,199,0.4);
-    animation:wiggle 3s ease-in-out infinite;
-    transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-    position:relative;
-  }
-  .avatar::after{
-    content:"";
-    position:absolute;
-    inset:-6px;
-    border-radius:50%;
-    border:2px dashed rgba(255,255,255,0.35);
-    animation:spin 8s linear infinite;
-  }
-  @keyframes spin{ to{ transform:rotate(360deg); } }
-  .avatar:hover{ transform:scale(1.15) rotate(-6deg); }
-  @keyframes wiggle{
-    0%,100%{ transform:rotate(-3deg); }
-    50%{ transform:rotate(3deg); }
-  }
-  .avatar span{
-    font-family:'Baloo 2', sans-serif;
-    font-size:36px;
-    font-weight:700;
-    color:#fff;
+    background:var(--text);
+    color:var(--bg);
+    font-size:20px;
+    font-weight:600;
+    letter-spacing:0.5px;
+    margin-bottom:24px;
   }
 
   h1{
-    font-family:'Baloo 2', sans-serif;
-    font-size:26px;
-    font-weight:700;
-    background:linear-gradient(90deg, var(--pink), var(--cyan), var(--pink));
-    background-size:200% auto;
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    animation:shimmer 4s linear infinite;
-  }
-  @keyframes shimmer{
-    to{ background-position:200% center; }
+    font-size:24px;
+    font-weight:600;
+    letter-spacing:-0.02em;
   }
   .role{
     color:var(--muted);
-    font-size:13px;
-    margin-top:8px;
-    letter-spacing:0.6px;
-    font-weight:500;
-    transition:color 0.3s ease, letter-spacing 0.3s ease;
-  }
-  .role:hover{
-    color:var(--yellow);
-    letter-spacing:1.2px;
+    font-size:15px;
+    margin-top:4px;
   }
 
-  .divider{
-    width:60px;
-    height:3px;
-    border-radius:99px;
-    background:linear-gradient(90deg, var(--pink), var(--purple), var(--cyan));
-    background-size:200% auto;
-    margin:22px auto;
-    animation:shimmer 3s linear infinite;
+  .summary{
+    color:var(--muted);
+    font-size:15px;
+    margin-top:20px;
+  }
+
+  hr{
+    border:0;
+    border-top:1px solid var(--border);
+    margin:28px 0;
+  }
+
+  h2{
+    font-size:12px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--subtle);
+    margin-bottom:12px;
   }
 
   .skills{
     display:flex;
     flex-wrap:wrap;
-    gap:9px;
-    justify-content:center;
-    margin-bottom:24px;
+    gap:8px;
+    list-style:none;
   }
-  .skill{
-    background:rgba(255,255,255,0.06);
-    border:1.5px solid transparent;
-    background-image:linear-gradient(rgba(24,18,42,0.9),rgba(24,18,42,0.9)), linear-gradient(135deg, var(--pink), var(--cyan));
-    background-origin:border-box;
-    background-clip:padding-box, border-box;
-    color:var(--text);
-    font-size:12px;
+  .skills li{
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:5px 12px;
+    font-size:13px;
     font-weight:500;
-    padding:7px 15px;
-    border-radius:999px;
-    transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, background 0.3s ease;
-    animation:pulseTag 3s ease-in-out infinite;
-  }
-  .skill:nth-child(2){ animation-delay:0.3s; }
-  .skill:nth-child(3){ animation-delay:0.6s; }
-  .skill:nth-child(4){ animation-delay:0.9s; }
-  .skill:nth-child(5){ animation-delay:1.2s; }
-  @keyframes pulseTag{
-    0%,100%{ transform:translateY(0); }
-    50%{ transform:translateY(-3px); }
-  }
-  .skill:hover{
-    transform:translateY(-6px) rotate(-3deg) scale(1.08);
-    box-shadow:0 10px 22px rgba(255,110,199,0.4);
+    color:var(--muted);
   }
 
-  .fact{
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.7;
-    font-weight:400;
-    transition:transform 0.3s ease;
+  .links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    list-style:none;
+    margin-top:28px;
   }
-  .fact:hover{ transform:scale(1.04); }
-  .fact strong{
-    color:var(--yellow);
-    font-weight:600;
+  .links a{
+    color:var(--accent);
+    font-size:14px;
+    font-weight:500;
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:border-color 0.15s ease;
+  }
+  .links a:hover{ border-bottom-color:currentColor; }
+
+  footer{
+    margin-top:32px;
+    color:var(--subtle);
+    font-size:13px;
   }
 </style>
 </head>
 <body>
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
+  <main class="card">
+    <div class="avatar" aria-hidden="true">RY</div>
 
-  <div class="card-wrap">
-    <div class="card">
-      <div class="avatar"><span>RY</span></div>
-      <h1>Rusydi Yusof</h1>
-      <div class="role">Data Janitor</div>
-      <div class="divider"></div>
-      <div class="skills">
-        <span class="skill">SQL</span>
-        <span class="skill">Python</span>
-        <span class="skill">DevOps</span>
-      </div>
-      <p class="fact"><strong>Learn and relearn.</strong></p>
-    </div>
-  </div>
+    <h1>Rusydi Yusof</h1>
+    <p class="role">Data Engineer</p>
+
+    <p class="summary">
+      I build and maintain the pipelines, models and infrastructure that turn
+      raw data into something teams can rely on.
+    </p>
+
+    <hr>
+
+    <h2>Core skills</h2>
+    <ul class="skills">
+      <li>SQL</li>
+      <li>Python</li>
+      <li>DevOps</li>
+    </ul>
+
+    <ul class="links">
+      <li><a href="https://github.com/rusydiyusof">GitHub</a></li>
+      <li><a href="mailto:rusydidev@gmail.com">Email</a></li>
+    </ul>
+
+    <footer>Learn and relearn.</footer>
+  </main>
 </body>
 </html>
